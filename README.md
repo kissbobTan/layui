@@ -4,7 +4,7 @@
 
 # 安装
 
-> 首先我们需要关掉vs，然后安装LayuiGenericTool (支持vs2019（适用所有版本）、vs2022（各别版本安装后无法直接使用，需要特殊处理）)
+> 首先我们需要关掉vs，然后安装LayuiGenericTool.visx (支持vs2019（适用所有版本）、vs2022（各别版本安装后无法直接使用，需要特殊处理）)
 
 > ![](https://github.com/kissbobTan/layui/blob/main/gifimg/1.png)
 > ![](https://github.com/kissbobTan/layui/blob/main/gifimg/2.png)
