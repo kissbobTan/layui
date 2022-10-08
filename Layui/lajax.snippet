@@ -1,0 +1,51 @@
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.1.0">
+		<Header>
+			<Title>请求</Title>
+			<Author>BobTan</Author>
+			<Shortcut>l_ajax</Shortcut>
+			<Description>Layui ajax $.requestPost{……}</Description>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>action</ID>
+					<ToolTip>方法</ToolTip>
+					<Default>方法名</Default>
+				</Literal>
+				<Literal>
+					<ID>param</ID>
+					<ToolTip>参数</ToolTip>
+					<Default>参数</Default>
+				</Literal>
+				<Literal>
+					<ID>url</ID>
+					<ToolTip>地址</ToolTip>
+					<Default>地址</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="JavaScript">
+				<![CDATA[
+			var layer = layui.layer;
+			
+			function $action$(){
+				let param = { $param$ };
+			
+				$$.requestPost({
+					url: '$url$',
+					param: param,
+					success: function (res) {
+						layer.msg('操作成功');
+					}
+				});
+			}
+	$end$
+    ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+	
+</CodeSnippets>

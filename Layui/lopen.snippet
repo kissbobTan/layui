@@ -1,0 +1,96 @@
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.1.0">
+		<Header>
+			<Title>弹窗</Title>
+			<Author>BobTan</Author>
+			<Shortcut>l_open</Shortcut>
+			<Description>Layui 弹窗</Description>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>btnId</ID>
+					<ToolTip>触发按钮Id</ToolTip>
+					<Default>触发按钮Id</Default>
+				</Literal>
+				<Literal>
+					<ID>action</ID>
+					<ToolTip>方法名</ToolTip>
+					<Default>方法名</Default>
+				</Literal>
+				<Literal>
+					<ID>title</ID>
+					<ToolTip>弹窗名称</ToolTip>
+					<Default>弹窗名称</Default>
+				</Literal>
+				<Literal>
+					<ID>repeatId</ID>
+					<ToolTip>防重ID</ToolTip>
+					<Default>防重ID</Default>
+				</Literal>
+				<Literal>
+					<ID>name</ID>
+					<ToolTip>弹框ID</ToolTip>
+					<Default>弹框ID</Default>
+				</Literal>
+				<Literal>
+					<ID>htmlname</ID>
+					<ToolTip>HTML代码</ToolTip>
+					<Default>HTML代码</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="JavaScript">
+				<![CDATA[
+	 var layer = layui.layer;
+	
+	 $$('#$btnId$').click(function () {
+        $action$();
+     });
+	
+	 function $action$() {
+        layer.open({
+            type: 1
+            , title: '$title$' //不显示标题栏
+            , closeBtn: 1
+            , area: ['520px', '350px']
+            , shade: 0.5
+            , id: '$repeatId$' //设定一个id，防止重复弹出(一般可不填)
+            , btn: ['保存', '取消']
+            , btnAlign: 'c'
+            , moveType: 0 //拖拽模式，0或者1
+            , content: $$('#$name$')
+            , success: function (layero) {
+            }
+            , yes: function (index, layero) {
+                //确定之后的操作
+                layer.close(index);
+            }
+        });
+    }
+				
+	//$htmlname$
+	//<!--触发按钮-->
+	//<button type="button" id="$btnId$" class="layui-btn layui-btn-sm">弹窗Button</button>
+	//<!--弹窗部分-->
+	//<div id="$name$" class="layui-box" style="display:none; margin-top: 10px;width:500px;">
+    //<form class="layui-form" action="">
+    //    <div class="layui-form-item">
+    //        <label class="layui-form-label">名称</label>
+    //        <div class="layui-input-block">
+    //            <input type="text" id="#" name="#" lay-verify="title" autocomplete="off" placeholder="请输入名" class="layui-input">
+    //        </div>
+    //    </div>
+    //    <input type="hidden" id="hidMenuID" value="0" />
+    //</form>
+	//</div>
+	$end$
+    ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+	
+	
+</CodeSnippets>

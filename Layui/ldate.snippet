@@ -1,0 +1,60 @@
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.1.0">
+		<Header>
+			<Title>日期范围组</Title>
+			<Author>BobTan</Author>
+			<Shortcut>l_date</Shortcut>
+			<Description>Layui 日期范围组</Description>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>beginTime</ID>
+					<ToolTip>起始时间Id</ToolTip>
+					<Default>起始时间Id</Default>
+				</Literal>
+				<Literal>
+					<ID>endTime</ID>
+					<ToolTip>截止时间Id</ToolTip>
+					<Default>截止时间Id</Default>
+				</Literal>
+				<Literal>
+					<ID>htmlname</ID>
+					<ToolTip>HTML代码</ToolTip>
+					<Default>HTML代码</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="JavaScript">
+				<![CDATA[
+	var laydate = layui.laydate;
+
+	laydate.render({
+		elem: '#$beginTime$'
+	});
+	laydate.render({
+		elem: '#$endTime$'
+	});
+	
+	//$htmlname$
+	//<div class="layui-inline">
+          //    <label class="layui-form-label">时间范围：</label>
+          //    <div class="layui-input-inline" style="width:100px">
+          //        <input type="text" class="layui-input" readonly="readonly" id="$beginTime$" placeholder="yyyy-MM-dd">
+          //    </div>
+          //    <div class="layui-input-inline">
+          //        -
+          //    </div>
+          //    <div class="layui-input-inline" style="width:100px">
+          //        <input type="text" class="layui-input" readonly="readonly" id="$endTime$" placeholder="yyyy-MM-dd">
+          //    </div>
+          //</div>
+	$end$
+    ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+	
+</CodeSnippets>

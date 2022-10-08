@@ -1,0 +1,39 @@
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.1.0">
+		<Header>
+			<Title>基础构架</Title>
+			<Author>BobTan</Author>
+			<Shortcut>l_container</Shortcut>
+			<Description>Layui 基础构架</Description>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>htmlname</ID>
+					<ToolTip>HTML代码</ToolTip>
+					<Default>HTML代码</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="JavaScript">
+				<![CDATA[
+	layui.use(['layer', 'table', 'form', 'laydate', 'laypage'], function () {
+		//你的业务
+	});
+	//$htmlname$
+	//<div class="layui-fluid">
+    //    <div class="layui-row layui-col-space15">
+    //        <div class="layui-card">
+    //            
+    //        </div>
+    //    </div>
+    //</div>
+	$end$
+    ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+	
+</CodeSnippets>

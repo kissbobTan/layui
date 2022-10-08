@@ -1,0 +1,187 @@
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.1.0">
+		<Header>
+			<Title>表格</Title>
+			<Author>BobTan</Author>
+			<Shortcut>l_table_base</Shortcut>
+			<Description>Layui table</Description>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>name</ID>
+					<ToolTip>类名</ToolTip>
+					<Default>表ID</Default>
+				</Literal>
+				<Literal>
+					<ID>propertyname</ID>
+					<ToolTip>字段名</ToolTip>
+					<Default>字段名1</Default>
+				</Literal>
+				<Literal>
+					<ID>titlename</ID>
+					<ToolTip>表头名称</ToolTip>
+					<Default>表头名称1</Default>
+				</Literal>
+				<Literal>
+					<ID>url</ID>
+					<ToolTip>地址</ToolTip>
+					<Default>地址</Default>
+				</Literal>
+				<Literal>
+					<ID>htmlname</ID>
+					<ToolTip>HTML代码</ToolTip>
+					<Default>HTML代码</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="JavaScript">
+				<![CDATA[
+	var table = layui.table;
+	
+	GetList();
+	
+	 var tableOption = {
+        id: '$name$',
+        elem: '#$name$',
+        height: 'full-90',
+        cols: [[
+            { field: '$propertyname$', title: '$titlename$', width: 150 },
+        ]],
+        event: true,
+        size: 'sm',
+        done: function (res, curr, count) {
+        }
+    };
+	
+	function GetList() {
+        $$.requestPost({
+            url: '$url$',
+            param: {
+            },
+            success: function (res) {
+				tableOption.limit = res.length;
+                tableOption.data = res;
+                table.render(tableOption);
+            }
+        });
+    }
+				
+	//$htmlname$
+	//<div class="layui-card-body">
+    //    <div class="layui-row">
+    //        <table id="$name$" class="layui-table" lay-filter="$name$"></table>
+    //    </div>
+    //</div>
+	$end$
+    ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+	
+	<CodeSnippet Format="1.1.0">
+		<Header>
+			<Title>表格分页</Title>
+			<Author>BobTan</Author>
+			<Shortcut>l_table_page</Shortcut>
+			<Description>Layui table</Description>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>name</ID>
+					<ToolTip>类名</ToolTip>
+					<Default>表ID</Default>
+				</Literal>
+				<Literal>
+					<ID>propertyname</ID>
+					<ToolTip>字段名</ToolTip>
+					<Default>字段名1</Default>
+				</Literal>
+				<Literal>
+					<ID>titlename</ID>
+					<ToolTip>表头名称</ToolTip>
+					<Default>表头名称1</Default>
+				</Literal>
+				<Literal>
+					<ID>url</ID>
+					<ToolTip>地址</ToolTip>
+					<Default>地址</Default>
+				</Literal>
+				<Literal>
+					<ID>htmlname</ID>
+					<ToolTip>HTML代码</ToolTip>
+					<Default>HTML代码</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="JavaScript">
+				<![CDATA[
+	var table = layui.table;
+	var laypage = layui.laypage;
+	
+	GetPaged(1, 20);
+	
+	 var tableOption = {
+        id: '$name$',
+        elem: '#$name$',
+        height: 'full-150',
+        cols: [[
+            { field: '$propertyname$', title: '$titlename$', width: 150 },
+            { title: '操作', width: 120, toolbar: '#resourceToolbar', fixed: 'right' }
+        ]],
+        event: true,
+        size: 'sm',
+        done: function (res, curr, count) {
+        }
+    };
+	
+	function GetPaged(pIndex, pSize) {
+        $$.requestPost({
+            url: '$url$',
+            param: {
+                PageIndex: pIndex,
+                PageSize: pSize
+            },
+            success: function (res) {
+                tableOption.limit = res.PageSize;
+                tableOption.data = res.ResultList;
+                table.render(tableOption);
+                SetPager(res.TotalCount, res.PageSize, res.PageIndex);
+            }
+        });
+    }
+	
+	function SetPager(tCount, pSize, pIndex) {
+        laypage.render({
+            elem: 'pager'
+            , count: tCount
+            , limit: pSize
+            , curr: pIndex
+            , pages: Math.ceil(tCount / pSize)
+            , layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+            , jump: function (obj, first) {
+                if (!first) {
+                    GetPaged(obj.curr, obj.limit);
+                }
+            }
+        });
+    }
+	
+	//$htmlname$
+	//<div class="layui-card-body">
+    //    <div class="layui-row">
+    //        <table id="$name$" class="layui-table" lay-filter="$name$"></table>
+    //    </div>
+    //    <div id="pager"></div>
+    //</div>
+	$end$		
+    ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

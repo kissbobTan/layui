@@ -1,0 +1,128 @@
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.1.0">
+		<Header>
+			<Title>基础页面分页</Title>
+			<Author>BobTan</Author>
+			<Shortcut>l_full_page</Shortcut>
+			<Description>Layui 基础页面：包含头部搜索组、和分页的表格</Description>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>name</ID>
+					<ToolTip>类名</ToolTip>
+					<Default>表ID</Default>
+				</Literal>
+				<Literal>
+					<ID>propertyname</ID>
+					<ToolTip>字段名</ToolTip>
+					<Default>字段名1</Default>
+				</Literal>
+				<Literal>
+					<ID>titlename</ID>
+					<ToolTip>表头名称</ToolTip>
+					<Default>表头名称1</Default>
+				</Literal>
+				<Literal>
+					<ID>url</ID>
+					<ToolTip>地址</ToolTip>
+					<Default>地址</Default>
+				</Literal>
+				<Literal>
+					<ID>htmlname</ID>
+					<ToolTip>HTML代码</ToolTip>
+					<Default>HTML代码</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="JavaScript">
+				<![CDATA[
+layui.use(['layer', 'table', 'form', 'laydate', 'laypage'], function () {
+				
+	var table = layui.table;
+	var laypage = layui.laypage;
+	
+	GetPaged(1, 20);
+	
+	$$('#btnSearch').click(function () {
+        GetPaged(1, 20);
+    });
+	
+	 var tableOption = {
+        id: '$name$',
+        elem: '#$name$',
+        height: 'full-150',
+        cols: [[
+            { field: '$propertyname$', title: '$titlename$', width: 150 },
+            { title: '操作', width: 120, toolbar: '#resourceToolbar', fixed: 'right' }
+        ]],
+        event: true,
+        size: 'sm',
+        done: function (res, curr, count) {
+        }
+    };
+	
+	function GetPaged(pIndex, pSize) {
+        $$.requestPost({
+            url: '$url$',
+            param: {
+                PageIndex: pIndex,
+                PageSize: pSize
+            },
+            success: function (res) {
+                tableOption.limit = res.PageSize;
+                tableOption.data = res.ResultList;
+                table.render(tableOption);
+                SetPager(res.TotalCount, res.PageSize, res.PageIndex);
+            }
+        });
+    }
+	
+	function SetPager(tCount, pSize, pIndex) {
+        laypage.render({
+            elem: 'pager'
+            , count: tCount
+            , limit: pSize
+            , curr: pIndex
+            , pages: Math.ceil(tCount / pSize)
+            , layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+            , jump: function (obj, first) {
+                if (!first) {
+                    GetPaged(obj.curr, obj.limit);
+                }
+            }
+        });
+    }
+	
+});	
+	
+	//$htmlname$
+	//<div class="layui-fluid">
+    //    <div class="layui-row layui-col-space15">
+    //        <div class="layui-card">
+    //            <div class="layui-form layui-form-auto" style="padding: 2px 5px 0px 5px;">
+    //                <div class="layui-form-item">
+    //                    <div class="layui-inline">
+    //                        <div class="layui-input-inline ">
+    //                            <button type="button" id="btnSearch" class="layui-btn layui-btn-sm">搜索</button>
+    //                        </div>
+    //                    </div>
+    //                </div>
+    //            </div>
+    //            <div class="layui-card-body">
+	//			    <div class="layui-row">
+	//			        <table id="$name$" class="layui-table" lay-filter="$name$"></table>
+	//			    </div>
+	//				<div id="pager"></div>
+	//			</div>
+    //        </div>
+    //    </div>
+    //</div>
+	$end$	
+    ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
